@@ -839,8 +839,11 @@ class _PinCodeTextFieldState extends State<PinCodeTextField>
   List<Widget> _generateFields() {
     var result = <Widget>[];
     for (int i = 0; i < widget.length; i++) {
-      result.add(
-        Container(
+   result.add(Semantics(
+        label: i.toString(),
+        enabled: true,
+        container: true,
+        child: Container(
             padding: _pinTheme.fieldOuterPadding,
             child: AnimatedContainer(
               curve: widget.animationCurve,
@@ -851,10 +854,7 @@ class _PinCodeTextFieldState extends State<PinCodeTextField>
                 color: widget.enableActiveFill
                     ? _getFillColorFromIndex(i)
                     : Colors.transparent,
-                boxShadow: (_pinTheme.activeBoxShadows != null ||
-                        _pinTheme.inActiveBoxShadows != null)
-                    ? _getBoxShadowFromIndex(i)
-                    : widget.boxShadows,
+                boxShadow: widget.boxShadows,
                 shape: _pinTheme.shape == PinCodeFieldShape.circle
                     ? BoxShape.circle
                     : BoxShape.rectangle,
@@ -903,7 +903,7 @@ class _PinCodeTextFieldState extends State<PinCodeTextField>
                 ),
               ),
             )),
-      );
+      ));
     }
     return result;
   }
